@@ -22,35 +22,39 @@ import java.util.List;
 public class LearningQueryController {
 
   private final LearningQueryInterface learningQueryInterface;
+
   @GetMapping("/list")
   public List<LearningEntity> readInvoice() {
     return learningQueryInterface.readAll();
   }
 
   @GetMapping("/platform")
-  public List<PlatformResponse> getTotalHoursByPlatform(){
-  return learningQueryInterface.getTotalHoursByPlatform();
+  public List<PlatformResponse> getTotalHoursByPlatform() {
+    return learningQueryInterface.getTotalHoursByPlatform();
   }
+
   @GetMapping("/leaderboard")
-  public List<LeaderBoardResponse> getLeaderBoard(){
+  public List<LeaderBoardResponse> getLeaderBoard() {
     return learningQueryInterface.getTopTenPerformers();
   }
+
   @GetMapping("/{org}/platform")
-  public List<PlatformResponse> getTotalHoursByPlatformAndOrg(@PathVariable String org ){
+  public List<PlatformResponse> getTotalHoursByPlatformAndOrg(@PathVariable String org) {
     return learningQueryInterface.getTotalHoursByPlatformAndOrg(org);
   }
 
   @GetMapping("/{org}/leaderboard")
-  public List<LeaderBoardResponse> getLeaderBoardByOrg(@PathVariable String org){
+  public List<LeaderBoardResponse> getLeaderBoardByOrg(@PathVariable String org) {
     return learningQueryInterface.getTopTenPerformersByOrg(org);
   }
 
   @GetMapping("/month-hours")
-  public List<MonthResponse> getMonthResponse(){
+  public List<MonthResponse> getMonthResponse() {
     return learningQueryInterface.getTotalHoursByMonth();
   }
+
   @GetMapping("/{org}/month-hours")
-  public List<MonthResponse> getMonthResponse(@PathVariable String org){
+  public List<MonthResponse> getMonthResponse(@PathVariable String org) {
     return learningQueryInterface.getTotalHoursByMonthByOrg(org);
   }
 

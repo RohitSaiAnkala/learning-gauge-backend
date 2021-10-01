@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 @Builder
 public class LinkedInRequest {
+
   @JsonProperty("Name")
   private String name;
 

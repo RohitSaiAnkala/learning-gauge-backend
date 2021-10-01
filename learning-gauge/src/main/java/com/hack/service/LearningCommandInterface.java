@@ -7,6 +7,7 @@ import com.hack.request.ZoomRequest;
 import java.util.List;
 
 public interface LearningCommandInterface {
+
   void createLinkedIn(List<LinkedInRequest> linkedInList);
 
   void createUdemy(List<UdemyRequest> udemyList);

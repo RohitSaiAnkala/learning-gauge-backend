@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @Table(name = "learning")
 public class LearningEntity {
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;

@@ -48,7 +48,8 @@ public class LearningCommandService implements LearningCommandInterface {
 
     return LearningEntity.builder()
         .employeeId(Long.parseLong(request.getUniqueUserId()))
-        .hours(request.getHoursViewed()==null?0.0:Double.parseDouble(request.getHoursViewed()))
+        .hours(
+            request.getHoursViewed() == null ? 0.0 : Double.parseDouble(request.getHoursViewed()))
         .courseName(request.getContentName())
         .category("Online")
         .courseType("Internal")
@@ -96,23 +97,29 @@ public class LearningCommandService implements LearningCommandInterface {
   }
 
   private static Double minutesToHours(Double minutes) {
-    if (minutes == null) return 0.0;
+    if (minutes == null) {
+      return 0.0;
+    }
     return minutes / 60.0;
   }
 
   private static Double minutesToHoursForZoom(String formatted) {
-    if(formatted.length()==0)
+    if (formatted.length() == 0) {
       return 0.0;
+    }
     String[] splitted = formatted.split(":");
     Double minutes = Double.parseDouble(splitted[0]);
-    if (minutes == null)
+    if (minutes == null) {
       return 0.0;
+    }
     return minutes / 60.0;
   }
-  private String getOrg(String employeeId){
-    if(employeeId.isEmpty())
+
+  private String getOrg(String employeeId) {
+    if (employeeId.isEmpty()) {
       return "";
+    }
     AssociateEntity entity = associateRepository.findByAssociateId(employeeId);
-   return entity != null ? entity.getOrg() : "";
+    return entity != null ? entity.getOrg() : "";
   }
 }

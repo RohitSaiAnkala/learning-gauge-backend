@@ -20,6 +20,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class LearningQueryService implements LearningQueryInterface {
+
   private final LearningRepository learningRepository;
   private final AssociateRepository associateRepository;
 
@@ -75,18 +76,18 @@ public class LearningQueryService implements LearningQueryInterface {
   private List<MonthResponse> helperTotalHoursByMonth(Map<String, Double> map) {
     List<MonthResponse> result = new ArrayList<>();
     String[] months = {
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
     };
     for (String month : months) {
       Double value = map.get(month);
@@ -133,41 +134,51 @@ public class LearningQueryService implements LearningQueryInterface {
 
   private void fillLinkedIn(Map<String, Double> map, Boolean isOrgRequired, String org) {
     List<LearningEntity> list;
-    if (Boolean.TRUE.equals(isOrgRequired))
+    if (Boolean.TRUE.equals(isOrgRequired)) {
       list = learningRepository.findAllByFacilitatorAndOrg("LinkedIn", org);
-    else {
+    } else {
       list = learningRepository.findAllByFacilitator("LinkedIn");
     }
     for (LearningEntity entity : list) {
       String date = entity.getStartDate();
       //  8/13/21, 8:56 AM
-      if (date.isEmpty()) continue;
+      if (date.isEmpty()) {
+        continue;
+      }
       String[] splitted = date.split("/");
-      if (splitted.length == 0) continue;
+      if (splitted.length == 0) {
+        continue;
+      }
       calculateHoursByMonth(map, splitted[0], entity.getHours());
     }
   }
 
   private void fillUdemy(Map<String, Double> map, Boolean isOrgRequired, String org) {
     List<LearningEntity> list;
-    if (Boolean.TRUE.equals(isOrgRequired))
+    if (Boolean.TRUE.equals(isOrgRequired)) {
       list = learningRepository.findAllByFacilitatorAndOrg("Udemy", org);
-    else list = learningRepository.findAllByFacilitator("Udemy");
+    } else {
+      list = learningRepository.findAllByFacilitator("Udemy");
+    }
     fill(map, list);
   }
 
   private void fillZoom(Map<String, Double> map, Boolean isOrgRequired, String org) {
     List<LearningEntity> list;
-    if (Boolean.TRUE.equals(isOrgRequired))
+    if (Boolean.TRUE.equals(isOrgRequired)) {
       list = learningRepository.findAllByFacilitatorAndOrg("Zoom", org);
-    else list = learningRepository.findAllByFacilitator("Zoom");
+    } else {
+      list = learningRepository.findAllByFacilitator("Zoom");
+    }
     fill(map, list);
   }
 
   private void fill(Map<String, Double> map, List<LearningEntity> list) {
     for (LearningEntity entity : list) {
       String date = entity.getStartDate();
-      if (date.isEmpty()) continue;
+      if (date.isEmpty()) {
+        continue;
+      }
       // 2019-03-01T12:34:12.660Z
       calculateHoursByMonth(map, date.substring(5, 7), entity.getHours());
     }

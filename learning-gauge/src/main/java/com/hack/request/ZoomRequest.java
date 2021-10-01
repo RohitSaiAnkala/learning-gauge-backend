@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 @Builder
 public class ZoomRequest {
+
   @JsonProperty("participants")
   List<ParticipantsRequest> participantsRequestList;
 }

@@ -9,8 +9,9 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="associate_details")
+@Table(name = "associate_details")
 public class AssociateEntity {
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;

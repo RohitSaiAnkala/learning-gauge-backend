@@ -24,12 +24,14 @@ public class LearningCommandController {
 
   @PostMapping("/linkedIn/create")
   public void createLinkedIn(@RequestBody List<LinkedInRequest> linkedInRequestList) {
-      learningCommandInterface.createLinkedIn(linkedInRequestList);
+    learningCommandInterface.createLinkedIn(linkedInRequestList);
   }
+
   @PostMapping("/udemy/create")
   public void createUdemy(@RequestBody List<UdemyRequest> udemyRequestList) {
     learningCommandInterface.createUdemy(udemyRequestList);
   }
+
   @PostMapping("/zoom/create")
   public void createZoom(@RequestBody ZoomRequest zoomRequest) {
     learningCommandInterface.createZoom(zoomRequest);

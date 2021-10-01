@@ -8,6 +8,7 @@ import com.hack.response.PlatformResponse;
 import java.util.List;
 
 public interface LearningQueryInterface {
+
   List<LearningEntity> readAll();
 
   List<PlatformResponse> getTotalHoursByPlatform();

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LearningRepository extends JpaRepository<LearningEntity, Long> {
+
   @Query(
       value =
           "select facilitator as category,sum(hours) as totalHours "
