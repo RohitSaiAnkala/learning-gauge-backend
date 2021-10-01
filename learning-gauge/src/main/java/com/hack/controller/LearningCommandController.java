@@ -5,6 +5,7 @@ import com.hack.request.UdemyRequest;
 import com.hack.request.ParticipantsRequest;
 import com.hack.request.ZoomRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/learning")
 public class LearningCommandController {
 

@@ -55,34 +55,44 @@ public class LearningQueryService implements LearningQueryInterface {
   @Override
   public List<MonthResponse> getTotalHoursByMonth() {
     Map<String, Double> map = new HashMap<>();
-    List<MonthResponse> result = new ArrayList<>();
     fillMap(map);
     fillLinkedIn(map, false, "");
     fillUdemy(map, false, "");
     fillZoom(map, false, "");
-    for (Entry entry : map.entrySet()) {
-      MonthResponse response =
-          new MonthResponse((String) entry.getKey(), (Double) entry.getValue());
-      result.add(response);
-    }
-    result.sort((m1, m2) -> m2.getTotalHours().compareTo(m1.getTotalHours()));
-    return result;
+    return helperTotalHoursByMonth(map);
   }
 
   @Override
   public List<MonthResponse> getTotalHoursByMonthByOrg(String org) {
     Map<String, Double> map = new HashMap<>();
-    List<MonthResponse> result = new ArrayList<>();
     fillMap(map);
     fillLinkedIn(map, true, org);
     fillUdemy(map, true, org);
     fillZoom(map, true, org);
-    for (Entry entry : map.entrySet()) {
-      MonthResponse response =
-          new MonthResponse((String) entry.getKey(), (Double) entry.getValue());
+    return helperTotalHoursByMonth(map);
+  }
+
+  private List<MonthResponse> helperTotalHoursByMonth(Map<String, Double> map) {
+    List<MonthResponse> result = new ArrayList<>();
+    String[] months = {
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    };
+    for (String month : months) {
+      Double value = map.get(month);
+      MonthResponse response = new MonthResponse(month, value);
       result.add(response);
     }
-    result.sort((m1, m2) -> m2.getTotalHours().compareTo(m1.getTotalHours()));
     return result;
   }
 
@@ -138,7 +148,7 @@ public class LearningQueryService implements LearningQueryInterface {
     }
   }
 
-  private void fillUdemy(Map<String, Double> map, Boolean isOrgRequired,String org) {
+  private void fillUdemy(Map<String, Double> map, Boolean isOrgRequired, String org) {
     List<LearningEntity> list;
     if (Boolean.TRUE.equals(isOrgRequired))
       list = learningRepository.findAllByFacilitatorAndOrg("Udemy", org);
@@ -146,7 +156,7 @@ public class LearningQueryService implements LearningQueryInterface {
     fill(map, list);
   }
 
-  private void fillZoom(Map<String, Double> map, Boolean isOrgRequired,String org) {
+  private void fillZoom(Map<String, Double> map, Boolean isOrgRequired, String org) {
     List<LearningEntity> list;
     if (Boolean.TRUE.equals(isOrgRequired))
       list = learningRepository.findAllByFacilitatorAndOrg("Zoom", org);
